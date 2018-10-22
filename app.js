@@ -18,7 +18,7 @@ myApp.config(function ($routeProvider) {
 
 myApp.controller('mainController', ['$scope', '$log', function ($scope, $log) {
 
-    $scope.people = [
+    $scope.cards = [
         {
             title: "Primo titolo",
             subtitle: "Primo sottotitolo",
@@ -58,7 +58,7 @@ myApp.directive("searchResult", function () {
         templateUrl: 'directives/searchresult.html',
         replace: true,
         scope: {
-            personObject: "=",
+            cardObject: "=",
         }
     }
 });
