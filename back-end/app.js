@@ -60,24 +60,20 @@ console.log(alessandro.__proto__);
 console.log(andrea.__proto__ === alessandro.__proto__);
 
 // creazione del server che genera Json dal quale andremo a prendere i dati per metterli nel frontend
-var http = require('http');
-var fs = require('fs');
+var express = require('express');
+var app = express();
+var port = process.env.PORT || 8080;
 
-http.createServer(function (req, res) {
+app.get('/', function (req, res) {
+    res.send('<html><head><body><h1>Ciao</h1></body></head></html>');
+});
 
-    if (req.url === '/') {
-        fs.createReadStream(__dirname + '/index.htm').pipe(res);
-    } else if (req.url === '/api') {
-        res.writeHead(200, { 'Content-type': 'application/json' }
-        );
-        var obj = {
-            firstname: 'John',
-            lastname: 'Doe'
-        };
-        res.end(JSON.stringify(obj));
-    } else {
-        res.writeHead(404);
-        res.end('NO');
-    }
+app.get('/api', function(req, res) {
+    res.json({ firstname: 'Alessandro', lastname: 'Cavuoti' });
+});
 
-}).listen(1337, '127.0.0.1');
+app.get('/persona/:id', function (req, res) { 
+    res.send('<html><head><body><h1>' + req.params.id + '</h1></body></head></html>');
+ });
+
+app.listen(port);
