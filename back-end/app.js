@@ -53,7 +53,31 @@ var alessandro = new Persona('Alessandro', 'Cavuoti');
 
 alessandro.saluto();
 
-// Si capisce quindi che Persona.prototype è lo stesso sia per alessandro che per andrea. Se al primo colpo di debug non ti stampa il proto insisti, alla seconda dovrebbe stamparlo
+/* Si capisce quindi che Persona.prototype è lo stesso sia per alessandro che per andrea. Se al primo colpo di debug 
+non ti stampa il proto insisti, alla seconda dovrebbe stamparlo */
 console.log(andrea.__proto__);
 console.log(alessandro.__proto__);
 console.log(andrea.__proto__ === alessandro.__proto__);
+
+// creazione del server che genera Json dal quale andremo a prendere i dati per metterli nel frontend
+var http = require('http');
+var fs = require('fs');
+
+http.createServer(function (req, res) {
+
+    if (req.url === '/') {
+        fs.createReadStream(__dirname + '/index.htm').pipe(res);
+    } else if (req.url === '/api') {
+        res.writeHead(200, { 'Content-type': 'application/json' }
+        );
+        var obj = {
+            firstname: 'John',
+            lastname: 'Doe'
+        };
+        res.end(JSON.stringify(obj));
+    } else {
+        res.writeHead(404);
+        res.end('NO');
+    }
+
+}).listen(1337, '127.0.0.1');
