@@ -1,7 +1,7 @@
 // Requiring the previous file
 var ritorno = require('./lol.js');
 
-console.log('Sono qui');
+console.log('Sono tornato alla pagina app.js');
 
 ritorno();
 
@@ -9,14 +9,23 @@ ritorno();
 var person = {
     name: "John",
     surname: "Snow",
-    greet: function () {
+    wife: {
+        name: "Daenerys",
+        surname: "Targaryen",
+        fullname: function() {
+            return this.name + ' ' + this.surname;
+        }
+    },
+    printGreet: function() {
         console.log('Hello ' + this.name + ' ' + this.surname);
     }
 };
 
-person.greet();
+person.printGreet();
 
 console.log(person['name'] + ' ' + person['surname'] + ' is a dick');
+
+console.log('His wife is ' + person.wife.fullname());
 
 /* @Per Andrea
     In Javascript come in molti altri linguaggi è possibile creare oggetti tramite 
