@@ -18,15 +18,13 @@ module.exports = function (app) {
 		res.send('Thank you!');
 		console.log('Name: ' + req.body.firstname);
 		console.log('Surname: ' + req.body.lastname);
+		file.name = req.body.firstname;
+		file.lastname = req.body.lastname;
+		console.log('Precedente: ' + JSON.stringify(file));
+		fs.writeFile(fileName, JSON.stringify(file), function (req, err) {
+			if (err) return console.log(err);
+			console.log('Nuovo: ' + JSON.stringify(file, null, 2));
+			console.log('writing to ' + fileName);
+		});
 	});
-
-	console.log('Precedente: ' + JSON.stringify(file));
 }
-
-file.key = "new value";
-
-fs.writeFile(fileName, JSON.stringify(file), function (err) {
-	if (err) return console.log(err);
-	console.log('Nuovo: ' + JSON.stringify(file, null, 2));
-	console.log('writing to ' + fileName);
-});
