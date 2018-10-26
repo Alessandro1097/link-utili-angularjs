@@ -16,7 +16,7 @@ module.exports = function (app) {
 	});
 
 	app.post('/person', urlencodedParser, function (req, res) {
-		res.send('Thank you!');
+		res.send('Thank you ' + req.body.firstname + ' ' + req.body.lastname + '!');
 		console.log('Name: ' + req.body.firstname);
 		console.log('Surname: ' + req.body.lastname);
 		file.name = req.body.firstname;
