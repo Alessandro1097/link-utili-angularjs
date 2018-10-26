@@ -1,8 +1,9 @@
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
-var fileName = './name.json';
-var file = require(fileName);
+var fileName = 'name.json';
+var filePath = './controllers/' + fileName;
+var file = require('./' + fileName);
 
 module.exports = function (app) {
 
@@ -21,10 +22,11 @@ module.exports = function (app) {
 		file.name = req.body.firstname;
 		file.lastname = req.body.lastname;
 		console.log('Precedente: ' + JSON.stringify(file));
-		fs.writeFile(fileName, JSON.stringify(file), function (req, err) {
+		
+		fs.writeFile(filePath, JSON.stringify(file), function (req, err) {
 			if (err) return console.log(err);
 			console.log('Nuovo: ' + JSON.stringify(file, null, 2));
-			console.log('writing to ' + fileName);
+			console.log('writing to ' + filePath);
 		});
 	});
 }
